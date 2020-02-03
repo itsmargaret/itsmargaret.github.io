@@ -1,3 +1,5 @@
+[Live](https://itsmargaret.github.io/dist/)
+
 # Background
 
 Gadabout is a travel app for the spontaneous and adventurous to choose their next destination. The user can set their destination preference to worldwide or restrict destinations to a specific continent. The user then spins a virtual roulette wheel to reveal their travel destination. Once the wheel lands, the app will display the best flight prices available within the last 48 hours and current weather. 
