@@ -1,0 +1,36 @@
+{
+  "name": "Gadabout",
+  "version": "1.0.0",
+  "description": "Gadabout is a travel app for the spontaneous and adventurous to choose their next destination. The user can set their destination preference to worldwide or restrict destinations to a specific continent. The user then spins a virtual roulette wheel to reveal their travel destination. Once the wheel lands, the app will display the best flight prices available within the last 48 hours and current weather.",
+  "private": true,
+  "scripts": {
+    "build": "webpack --watch --mode=development",
+    "start": "node app.js",
+    "server": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsmargaret/Gadabout.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsmargaret/Gadabout/issues"
+  },
+  "homepage": "https://github.com/itsmargaret/Gadabout#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15"
+  },
+  "main": "webpack.config.js"
+}
