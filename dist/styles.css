@@ -1,0 +1,43 @@
+body {
+  margin: 0px;
+  overflow: hidden;
+}
+
+.slider {
+  margin-left: 206px;
+  margin-top: 20px;
+}
+
+.sphere {
+  fill: #4242e4;
+  fill-opacity: .8;
+}
+
+.country {
+  stroke: black;
+  stroke-width: 0.1px;
+  fill-opacity: .8;
+}
+
+.country.highlighted {
+  stroke-width: 0.5px;
+}
+
+.country:hover {
+  fill-opacity: 1;
+}
+
+.tick {
+  cursor: pointer;
+}
+
+.tick text {
+  font-size: 1em;
+  fill: black;
+  font-family: sans-serif;
+}
+
+.tick circle {
+  stroke: black;
+  stroke-opacity: 0.5;
+}

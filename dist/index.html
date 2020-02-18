@@ -1,27 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gadabout</title>
-    <script src="./main.js"></script>
-</head>
-<body>
-    <input type="button" value="spin" style="float:left;" id='spin' />
-    <div className="cont-dd">
-        <select id="filter">
-            <option value="all">All</option>
-            <option value="northAmerica">North America</option value="All">
-            <option value="southAmerica">South America</option value="All">
-            <option value="europe">Europe</option value="All">
-            <option value="africa">Africa</option value="All">
-            <option value="asia">Asia</option value="All">
-            <option value="australia">Australia</option value="All">
-        </select>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Climate Change Over Time</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://d3js.org/d3.v5.js"></script>
+  </head>
+  <body>
+    <h1>Annual Average Temperature in Each Country</h1>
+    <p>
+      This is a chloropleth map displaying the average temperature each year
+      1901 through 2014. You can zoom-in on any region and click and drag to
+      explore the map in greater detail. Click the legend for a visual filter by
+      temperature range.
+    </p>
+    <svg width="1000" height="600"></svg>
+    <div class="slider">
+      <input
+        id="slider"
+        type="range"
+        min="1901"
+        max="2014"
+        value="1901"
+        step="1"
+        style="width: 540px;"
+      />
     </div>
-    <canvas id="canvas" width="1000" height="700"></canvas>
-    <div id="root"></div>
-
-</body>
+    <span id="range">1901</span>
+    <script type="text/javascript">
+      onload = () => {
+        const slider = document.getElementById("slider");
+        const range = document.getElementById("range");
+        slider.oninput = function() {
+          range.innerHTML = this.value;
+        };
+        slider.oninput();
+      };
+    </script>
+    <div class="radio">
+      <label>
+        <input type="radio" name="units" id="celsius" value="celsius" checked />
+        <i></i>
+        Celsius
+      </label>
+      <label>
+        <input type="radio" name="units" id="fahrenheit" value="fahrenheit" />
+        <i></i>
+        Fahrenheit
+      </label>
+    </div>
+    <script src="./main.js"></script>
+  </body>
 </html>

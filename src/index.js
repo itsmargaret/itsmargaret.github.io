@@ -1,263 +1,140 @@
-const Continents = require("./destinations");
-const keys = require("../config/keys");
-const axios = require("axios");
+import { select, selectAll, scaleOrdinal, schemeSpectral } from "d3";
+import { loadAndProcessData } from "./loadAndProcessData";
+import { colorLegend } from "./colorLegend";
+import { colorMap } from "./colorMap";
+// import {yearSlider} from './yearSlider';
 
-const colors = [
-  "#46B1C9",
-  "#84C0C6",
-  "#9FB7B9",
-  "#BCC1BA",
-  "#A57982",
-  "#B98EA7",
-  "#FCECC9",
-  "#FCB0B3",
-  "#F93943",
-  "#7EB2DD",
-  "#445E93"
-];
+document.addEventListener("DOMContentLoaded", function() {
+  const svg = select("svg");
 
-let options;
-let startAngle = 0;
-let spinTimeout = null;
+  const colorMapG = svg.append("g");
 
-let spinArcStart = 10;
-let spinTime = 0;
-let spinTimeTotal = 0;
+  const colorLegendG = svg.append("g").attr("transform", `translate(40,310)`);
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("spin").addEventListener("click", spin);
-  document
-    .getElementById("filter")
-    .addEventListener("change", drawRouletteWheel);
+  const colorScale = scaleOrdinal(schemeSpectral[10]);
 
-  drawRouletteWheel();
-  //   document.addEventListener("DOMContentLoaded", () => {
-  // drawRouletteWheel();
-  //   });
-
-  function drawRouletteWheel() {
-    let canvas = document.getElementById("canvas");
-    let optionIndex = document.getElementById("filter").selectedIndex;
-    let option = document.getElementById("filter").options[optionIndex];
-    let ctx;
-    if (canvas.getContext) {
-      let outsideRadius = 310;
-      let textRadius = 260;
-      let insideRadius = 215;
-
-      ctx = canvas.getContext("2d");
-      ctx.clearRect(0, 0, 500, 500);
-
-      ctx.strokeStyle = "black";
-      ctx.lineWidth = 2;
-
-      ctx.font = "bold 12px Helvetica, Arial";
-
-      switch (option.value) {
-        case "all":
-          options = [
-            ...Continents.northAmerica,
-            ...Continents.southAmerica,
-            ...Continents.europe,
-            ...Continents.asia,
-            ...Continents.africa,
-            ...Continents.australia
-          ];
-          break;
-        case "northAmerica":
-          options = [...Continents.northAmerica];
-          break;
-        case "southAmerica":
-          options = [...Continents.southAmerica];
-          break;
-        case "europe":
-          options = [...Continents.europe];
-          break;
-        case "asia":
-          options = [...Continents.asia];
-          break;
-        case "africa":
-          options = [...Continents.africa];
-          break;
-        case "australia":
-          options = [...Continents.australia];
-          break;
-        default:
-          options = [
-            ...Continents.northAmerica,
-            ...Continents.southAmerica,
-            ...Continents.europe,
-            ...Continents.asia,
-            ...Continents.africa,
-            ...Continents.australia
-          ];
-          break;
-      }
-
-      for (let i = 0; i < options.length; i++) {
-        const arc = Math.PI / (options.length / 2);
-        let angle = startAngle + i * arc;
-        ctx.fillStyle = colors[i % colors.length];
-
-        ctx.beginPath();
-        ctx.arc(350, 350, outsideRadius, angle, angle + arc, false); //this is for the wheel center
-        ctx.arc(350, 350, insideRadius, angle + arc, angle, true);
-        ctx.stroke();
-        ctx.fill();
-
-        ctx.save();
-        ctx.shadowOffsetX = -1;
-        ctx.shadowOffsetY = -1;
-        ctx.shadowBlur = 0;
-        ctx.shadowColor = "rgb(220,220,220)";
-        ctx.fillStyle = "black";
-        ctx.translate(
-          350 + Math.cos(angle + arc / 2) * textRadius, //make sure this matches the wheel center
-          350 + Math.sin(angle + arc / 2) * textRadius
-        );
-        ctx.rotate(angle + arc / 0.5 + Math.PI / 0.25 - 0.1); //rotate text
-        let text = options[i].name;
-        ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-        ctx.restore();
-      }
-
-      //start covering
-      for (let i = 0; i < options.length; i++) {
-        const arc = Math.PI / (options.length / 2);
-        let angle = startAngle + i * arc;
-        ctx.fillStyle = "black";
-
-        ctx.beginPath();
-        ctx.arc(350, 350, outsideRadius, angle, angle + arc, false); //this is for the wheel center
-        // ctx.arc(350, 350, insideRadius, angle + arc, angle, true);
-        ctx.stroke();
-        ctx.fill();
-
-        ctx.save();
-      }
-      //end covering
-
-      ctx.fillStyle = "black";
-      ctx.beginPath();
-      canvas_arrow(ctx, 680, 345, 635, 345);
-      ctx.lineWidth = 10;
-      ctx.stroke();
-
-      function canvas_arrow(context, fromx, fromy, tox, toy) {
-        let headlen = 9; // length of head in pixels
-        let dx = tox - fromx;
-        let dy = toy - fromy;
-        let angle = Math.atan2(dy, dx);
-        context.moveTo(fromx, fromy);
-        context.lineTo(tox, toy);
-        context.lineTo(
-          tox - headlen * Math.cos(angle - Math.PI / 7),
-          toy - headlen * Math.sin(angle - Math.PI / 7)
-        );
-        context.moveTo(tox, toy);
-        context.lineTo(
-          tox - headlen * Math.cos(angle + Math.PI / 7),
-          toy - headlen * Math.sin(angle + Math.PI / 7)
-        );
-      }
+  //TODO review scale and edit for highs/lows after completing raw data
+  // -7.4 - 29.7
+  const colorValue = d => {
+    if (
+      d.properties[slider.property("value")] === undefined ||
+      d.properties[slider.property("value")] < -4.2
+    ) {
+      return 'a';
+    } else if (
+      d.properties[slider.property("value")] >= -4.2 &&
+      d.properties[slider.property("value")] < -.4
+    ) {
+      return 'b';
+    } else if (
+      d.properties[slider.property("value")] >= -.4 &&
+      d.properties[slider.property("value")] < 3.4
+    ) {
+      return 'c';
+    } else if (
+      d.properties[slider.property("value")] >= 3.4 &&
+      d.properties[slider.property("value")] < 7.2
+    ) {
+      return 'd';
+    } else if (
+      d.properties[slider.property("value")] >= 7.2 &&
+      d.properties[slider.property("value")] < 11
+    ) {
+      return 'e';
+    } else if (
+      d.properties[slider.property("value")] >= 11 &&
+      d.properties[slider.property("value")] < 14.8
+    ) {
+      return 'f';
+    } else if (
+      d.properties[slider.property("value")] >= 14.8 &&
+      d.properties[slider.property("value")] < 18.6
+    ) {
+      return 'g';
+    } else if (
+      d.properties[slider.property("value")] >= 18.6 &&
+      d.properties[slider.property("value")] < 22.4
+    ) {
+      return 'h';
+    } else if (
+      d.properties[slider.property("value")] >= 22.4 &&
+      d.properties[slider.property("value")] < 26.2
+    ) {
+      return 'i';
+    } else if (d.properties[slider.property("value")] >= 26.2) {
+      return 'j';
     }
-  }
+  };
 
-  function spin() {
-    spinAngleStart = Math.random() * 10 + 10;
-    spinTime = 0;
-    spinTimeTotal = Math.random() * 3 + 4 * 1000;
-    rotateWheel();
-  }
+  let selectedColorValue;
+  let features;
 
-  function rotateWheel() {
-    spinTime += 30;
-    if (spinTime >= spinTimeTotal) {
-      stopRotateWheel();
-      return;
+  const onClick = d => {
+    selectedColorValue = d;
+    render();
+  };
+
+  const slider = select("#slider");
+  const range = select("#range");
+  const units = selectAll("input[name='units']");
+  let unit;
+
+  units.on("change", function() {
+    console.log(this.value);
+    if (this.value === "celsius") {
+      unit = "C";
+    } else {
+      unit = "F";
     }
-    let spinAngle =
-      spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
-    startAngle += (spinAngle * Math.PI) / 180;
-    drawRouletteWheel();
-    spinTimeout = setTimeout(rotateWheel(), 30);
-  }
+    render();
+  });
 
-  function stopRotateWheel() {
-    let ctx = canvas.getContext("2d");
-    const arc = Math.PI / (options.length / 2);
-    clearTimeout(spinTimeout);
-    let degrees = (startAngle * 180) / Math.PI + 90 - 90;
-    let arcd = (arc * 180) / Math.PI;
-    let index = Math.floor((360 - (degrees % 360)) / arcd);
-    ctx.save();
-    ctx.font = "bold 30px Helvetica, Arial";
-    let text = options[index].name;
-    let id = options[index].id;
-    let airport = options[index].airport;
-    ctx.fillText(text, 350 - ctx.measureText(text).width / 2, 350 + 10);
-    ctx.restore();
-    displayWeather(id);
-    // displayFlights(airport);
-  }
+  loadAndProcessData().then(countries => {
+    let year;
+    features = countries.features;
+    render();
 
-  function easeOut(t, b, c, d) {
-    let ts = (t /= d) * t;
-    let tc = ts * t;
-    return b + c * (tc + -3 * ts + 3 * t);
-  }
+    const oninput = function() {
+      range.property("innerHTML", slider.property("value"));
+      year = slider.property("value");
+      render(year);
+    };
 
+    //update slider with smooth interpolation
+    slider.on("input", () => oninput());
+  });
 
-  function displayWeather(id) {
-    const app = document.getElementById("root");
-    const container = document.createElement("div");
-    container.setAttribute("class", "container");
-    if (app.lastChild) app.removeChild(app.lastChild);
-    app.appendChild(container);
+  const render = (year = 1901) => {
+    colorScale
+      .domain(features.map(colorValue))
+      .domain(
+        colorScale
+          .domain()
+          .sort()
+          .reverse()
+      )
+      // console.log(colorScale.domain().sort());
+      // use range if you don't want to specify number of colors in legend in ColorScale definition
+      // .range(schemeSpectral[10]);
 
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?id=${id}&APPID=${keys.weather}`
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        const currentTemp = Math.round(
-          ((data.main.temp - 273.15) * 9) / 5 + 32
-        ); //current temp in F
-        const feelsLike = Math.round(
-          ((data.main.feels_like - 273.15) * 9) / 5 + 32
-        ); //feels like in F
-        const currentLow = Math.round(
-          ((data.main.temp_min - 273.15) * 9) / 5 + 32
-        ); //current low in F
-        const currentHigh = Math.round(
-          ((data.main.temp_max - 273.15) * 9) / 5 + 32
-        ); //current high in F
+    colorLegendG.call(colorLegend, {
+      colorScale,
+      circleRadius: 8,
+      spacing: 20,
+      textOffset: 12,
+      backgroundRectWidth: 175,
+      onClick,
+      selectedColorValue,
+      unit
+    });
 
-        const weather = document.createElement("div");
-        weather.setAttribute("class", "weather");
-        const h1 = document.createElement("h1");
-        h1.textContent = data.weather[0].main; //description
-        const icon = document.createElement("img");
-        icon.setAttribute(
-          "src",
-          `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-        );
-        const p = document.createElement("p");
-        p.textContent = `Current temp: ${currentTemp}
-        Feels Like: ${feelsLike}
-        High: ${currentHigh}
-        Low: ${currentLow}`;
-
-        container.appendChild(weather);
-        weather.appendChild(h1);
-        weather.appendChild(icon);
-        weather.appendChild(p);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-  
+    colorMapG.call(colorMap, {
+      features,
+      colorValue,
+      colorScale,
+      selectedColorValue,
+      // year,
+      slider
+    });
+  };
 });
