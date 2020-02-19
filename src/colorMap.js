@@ -6,7 +6,6 @@ const pathGenerator = geoPath().projection(projection);
 export const colorMap = (selection, props) => {
   const { features, colorScale, colorValue, selectedColorValue, slider } = props;
 
-  console.log("colormap year" + slider.property('value'));
   const gUpdate = selection.selectAll("g").data([null]);
   const gEnter = gUpdate.enter().append("g");
   const g = gUpdate.merge(gEnter);
@@ -24,6 +23,7 @@ export const colorMap = (selection, props) => {
     })
   );
 
+  //update title value depending on radio buttons
   const countryPaths = g.selectAll(".country").data(features);
   const countryPathsEnter = countryPaths
     .enter()

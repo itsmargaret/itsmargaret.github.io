@@ -15,53 +15,54 @@ document.addEventListener("DOMContentLoaded", function() {
 
   //TODO review scale and edit for highs/lows after completing raw data
   // -7.4 - 29.7
+  // update to -17.5 - 29.7 
   const colorValue = d => {
     if (
       d.properties[slider.property("value")] === undefined ||
-      d.properties[slider.property("value")] < -4.2
+      d.properties[slider.property("value")] < -15
     ) {
       return 'a';
     } else if (
-      d.properties[slider.property("value")] >= -4.2 &&
-      d.properties[slider.property("value")] < -.4
+      d.properties[slider.property("value")] >= -15 &&
+      d.properties[slider.property("value")] < -10
     ) {
       return 'b';
     } else if (
-      d.properties[slider.property("value")] >= -.4 &&
-      d.properties[slider.property("value")] < 3.4
+      d.properties[slider.property("value")] >= -10 &&
+      d.properties[slider.property("value")] < -5
     ) {
       return 'c';
     } else if (
-      d.properties[slider.property("value")] >= 3.4 &&
-      d.properties[slider.property("value")] < 7.2
+      d.properties[slider.property("value")] >= -5 &&
+      d.properties[slider.property("value")] < 0
     ) {
       return 'd';
     } else if (
-      d.properties[slider.property("value")] >= 7.2 &&
-      d.properties[slider.property("value")] < 11
+      d.properties[slider.property("value")] >= 0 &&
+      d.properties[slider.property("value")] < 5
     ) {
       return 'e';
     } else if (
-      d.properties[slider.property("value")] >= 11 &&
-      d.properties[slider.property("value")] < 14.8
+      d.properties[slider.property("value")] >= 5 &&
+      d.properties[slider.property("value")] < 10
     ) {
       return 'f';
     } else if (
-      d.properties[slider.property("value")] >= 14.8 &&
-      d.properties[slider.property("value")] < 18.6
+      d.properties[slider.property("value")] >= 10 &&
+      d.properties[slider.property("value")] < 15
     ) {
       return 'g';
     } else if (
-      d.properties[slider.property("value")] >= 18.6 &&
-      d.properties[slider.property("value")] < 22.4
+      d.properties[slider.property("value")] >= 15 &&
+      d.properties[slider.property("value")] < 20
     ) {
       return 'h';
     } else if (
-      d.properties[slider.property("value")] >= 22.4 &&
-      d.properties[slider.property("value")] < 26.2
+      d.properties[slider.property("value")] >= 20 &&
+      d.properties[slider.property("value")] < 25
     ) {
       return 'i';
-    } else if (d.properties[slider.property("value")] >= 26.2) {
+    } else if (d.properties[slider.property("value")] >= 25) {
       return 'j';
     }
   };
