@@ -1,4 +1,4 @@
-import { select, selectAll, scaleOrdinal, schemeSpectral } from "d3";
+import { select, selectAll, scaleOrdinal, schemeSpectral, timer } from "d3";
 import { loadAndProcessData } from "./loadAndProcessData";
 import { colorLegend } from "./colorLegend";
 import { colorMap } from "./colorMap";
@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const colorScale = scaleOrdinal(schemeSpectral[10]);
 
   //TODO review scale and edit for highs/lows after completing raw data
-  // -7.4 - 29.7
-  // update to -17.5 - 29.7 
+  // update to -22.3 ? - 29.7 
   const colorValue = d => {
     if (
       d.properties[slider.property("value")] === undefined ||
@@ -81,7 +80,6 @@ document.addEventListener("DOMContentLoaded", function() {
   let unit;
 
   units.on("change", function() {
-    console.log(this.value);
     if (this.value === "celsius") {
       unit = "C";
     } else {
@@ -116,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
       )
       // console.log(colorScale.domain().sort());
       // use range if you don't want to specify number of colors in legend in ColorScale definition
-      // .range(schemeSpectral[10]);
+      .range(schemeSpectral[10]);
 
     colorLegendG.call(colorLegend, {
       colorScale,
