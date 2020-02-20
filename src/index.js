@@ -147,7 +147,8 @@ document.addEventListener("DOMContentLoaded", function() {
       colorValue,
       colorScale,
       selectedColorValue,
-      slider
+      slider, 
+      unit
     });
   };
 });

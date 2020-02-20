@@ -4,7 +4,14 @@ const projection = geoNaturalEarth1();
 const pathGenerator = geoPath().projection(projection);
 
 export const colorMap = (selection, props) => {
-  const { features, colorScale, colorValue, selectedColorValue, slider } = props;
+  const {
+    features,
+    colorScale,
+    colorValue,
+    selectedColorValue,
+    slider,
+    unit
+  } = props;
 
   const gUpdate = selection.selectAll("g").data([null]);
   const gEnter = gUpdate.enter().append("g");
@@ -41,9 +48,22 @@ export const colorMap = (selection, props) => {
       d => selectedColorValue && selectedColorValue === colorValue(d)
     )
     .select("title")
-    .text(d => d.properties.name + ": " + d.properties[slider.property('value')] + "°C " + slider.property('value'));
-
+    .text(d => {
+      let temp;
+      if (unit !== "F") {
+        temp = d.properties[slider.property("value")];
+      } else {
+        temp = (d.properties[slider.property("value")] * 1.8 + 32).toFixed(1);
+      }
+      return d.properties.name + ": " + temp + "°";
+    });
   countryPathsEnter
     .append("title")
-    .text(d => d.properties.name + ": " + d.properties[slider.property('value')] + "°C " + slider.property('value'));
+    .text(
+      d =>
+        d.properties.name +
+        ": " +
+        d.properties[slider.property("value")] +
+        "°C "
+    );
 };

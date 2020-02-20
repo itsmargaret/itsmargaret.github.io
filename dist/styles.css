@@ -1,15 +1,20 @@
 body {
   margin: 0px;
-  overflow: hidden;
+  /* overflow: hidden; */
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 nav {
   z-index: 1;
-  position: relative;
+  position: fixed;
   background: #2b3843;
   display: flex;
   justify-content: flex-end;
   padding: 5px 0;
+  width: 100%;
 }
 
 i {
@@ -32,28 +37,35 @@ i {
   align-items: center;
 }
 
+.nav-links:last-of-type {
+  margin-right: 25px;
+}
+
 h1 {
   font-size: 2em;
-  font-family: sans-serif;
   color: darkslategrey;
   line-height: 1.15;
   margin-bottom: 0px;
-  margin-left: 10%;
+  margin-top: 60px;
 }
 
 p {
   font-size: 1em;
-  font-family: sans-serif;
   color: darkslategrey;
   line-height: 1.15;
   margin-bottom: 20px;
-  margin-left: 10%;
   width: 75%;
 }
 
 .slider {
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+}
+
+#range {
+  font-size: 1.5em;
+  color: slategray;
+  /* vertical-align: middle; */
 }
 
 .sphere {
@@ -88,4 +100,16 @@ p {
 .tick circle {
   stroke: black;
   stroke-opacity: 0.5;
+}
+
+.radio {
+  margin-bottom: 30px;
+  margin-top: 0;
+  background-color: whitesmoke;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
 }

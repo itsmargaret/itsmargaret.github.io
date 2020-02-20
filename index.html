@@ -7,7 +7,10 @@
     <title>Climate Change Over Time</title>
     <link rel="stylesheet" href="dist/styles.css" />
     <script src="https://d3js.org/d3.v5.js"></script>
-    <script src="https://kit.fontawesome.com/f91ab18c71.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/f91ab18c71.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <nav>
@@ -17,7 +20,9 @@
         ></a>
       </div>
       <div class="nav-links">
-        <a href="https://www.linkedin.com/in/margaret-cavenagh-93589846/" target="_blank"
+        <a
+          href="https://www.linkedin.com/in/margaret-cavenagh-93589846/"
+          target="_blank"
           ><i class="fab fa-linkedin"></i
         ></a>
       </div>
@@ -30,11 +35,13 @@
     <h1 class="title">Annual Average Temperature in Each Country</h1>
     <p>
       This is a chloropleth map displaying the average temperature each year
-      1901 through 2014. You can scroll to zoom in on any region and click and drag to
-      explore the map in greater detail. Click the legend for a visual filter by
+      1901 through 2014. You can scroll to zoom in on any region, click and drag
+      to explore the map in greater detail, and hover over a country to read its
+      average temperature of the year. Click the legend for a visual filter by
       temperature range.
     </p>
-    <svg width="1000" height="600"></svg>
+    <svg width="75%" height="550"></svg><br />
+    <span id="range">Year: 1901</span>
     <div class="slider">
       <input
         id="slider"
@@ -46,13 +53,12 @@
         style="width: 540px;"
       />
     </div>
-    <span id="range">1901</span>
     <script type="text/javascript">
       onload = () => {
         const slider = document.getElementById("slider");
         const range = document.getElementById("range");
         slider.oninput = function() {
-          range.innerHTML = this.value;
+          range.innerHTML = "Year: " + this.value;
         };
         slider.oninput();
       };
