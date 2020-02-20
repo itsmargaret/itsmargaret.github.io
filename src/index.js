@@ -2,13 +2,11 @@ import {
   select,
   selectAll,
   scaleOrdinal,
-  schemeSpectral,
-  drag
+  schemeSpectral
 } from "d3";
 import { loadAndProcessData } from "./loadAndProcessData";
 import { colorLegend } from "./colorLegend";
 import { colorMap } from "./colorMap";
-// import {yearSlider} from './yearSlider';
 
 document.addEventListener("DOMContentLoaded", function() {
   const svg = select("svg");
@@ -20,10 +18,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const colorScale = scaleOrdinal(schemeSpectral[10]);
 
   //TODO review scale and edit for highs/lows after completing raw data
-  // update to -22.3 ? - 29.7
+  // update to -22.3 ? - 29.7; include undefined as separate category
   let colorValue = d => {
     if (
-      d.properties[slider.property("value")] === undefined ||
       d.properties[slider.property("value")] < -15
     ) {
       return "a";
@@ -127,8 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
           .sort()
           .reverse()
       )
-      // console.log(colorScale.domain().sort());
-      // use range if you don't want to specify number of colors in legend in ColorScale definition
       .range(schemeSpectral[10]);
 
     colorLegendG.call(colorLegend, {

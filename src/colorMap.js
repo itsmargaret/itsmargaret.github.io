@@ -30,7 +30,6 @@ export const colorMap = (selection, props) => {
     })
   );
 
-  //update title value depending on radio buttons
   const countryPaths = g.selectAll(".country").data(features);
   const countryPathsEnter = countryPaths
     .enter()

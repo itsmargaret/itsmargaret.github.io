@@ -9,7 +9,7 @@ export const loadAndProcessData = () =>
     ])
     .then(([csvData, topoJSONdata]) => {
       const rowByName = csvData.reduce((accumulator, d) => {
-        accumulator[d.Name] = d;
+        accumulator[d.name] = d;
         return accumulator;
       }, {});
 
