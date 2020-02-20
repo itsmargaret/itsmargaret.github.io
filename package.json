@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "d3": "^5.15.0",
+    "d3-simple-slider": "^1.5.4",
     "d3-timer": "^1.0.10",
     "topojson": "^3.0.2",
     "world-atlas": "^2.0.2"

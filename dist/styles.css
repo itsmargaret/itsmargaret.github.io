@@ -3,20 +3,68 @@ body {
   overflow: hidden;
 }
 
+nav {
+  z-index: 1;
+  position: relative;
+  background: #2b3843;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 0;
+}
+
+i {
+  color: white;
+  font-size: 24px;
+}
+
+.nav-links {
+  background: darkslategrey;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  margin: 0px 3px;
+  border-radius: 3px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2em;
+  font-family: sans-serif;
+  color: darkslategrey;
+  line-height: 1.15;
+  margin-bottom: 0px;
+  margin-left: 10%;
+}
+
+p {
+  font-size: 1em;
+  font-family: sans-serif;
+  color: darkslategrey;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  margin-left: 10%;
+  width: 75%;
+}
+
 .slider {
-  margin-left: 206px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .sphere {
   fill: #4242e4;
-  fill-opacity: .8;
+  fill-opacity: 0.8;
 }
 
 .country {
   stroke: black;
   stroke-width: 0.1px;
-  fill-opacity: .8;
+  fill-opacity: 0.8;
 }
 
 .country.highlighted {

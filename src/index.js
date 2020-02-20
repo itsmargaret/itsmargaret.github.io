@@ -1,4 +1,10 @@
-import { select, selectAll, scaleOrdinal, schemeSpectral, timer } from "d3";
+import {
+  select,
+  selectAll,
+  scaleOrdinal,
+  schemeSpectral,
+  drag
+} from "d3";
 import { loadAndProcessData } from "./loadAndProcessData";
 import { colorLegend } from "./colorLegend";
 import { colorMap } from "./colorMap";
@@ -14,55 +20,55 @@ document.addEventListener("DOMContentLoaded", function() {
   const colorScale = scaleOrdinal(schemeSpectral[10]);
 
   //TODO review scale and edit for highs/lows after completing raw data
-  // update to -22.3 ? - 29.7 
-  const colorValue = d => {
+  // update to -22.3 ? - 29.7
+  let colorValue = d => {
     if (
       d.properties[slider.property("value")] === undefined ||
       d.properties[slider.property("value")] < -15
     ) {
-      return 'a';
+      return "a";
     } else if (
       d.properties[slider.property("value")] >= -15 &&
       d.properties[slider.property("value")] < -10
     ) {
-      return 'b';
+      return "b";
     } else if (
       d.properties[slider.property("value")] >= -10 &&
       d.properties[slider.property("value")] < -5
     ) {
-      return 'c';
+      return "c";
     } else if (
       d.properties[slider.property("value")] >= -5 &&
       d.properties[slider.property("value")] < 0
     ) {
-      return 'd';
+      return "d";
     } else if (
       d.properties[slider.property("value")] >= 0 &&
       d.properties[slider.property("value")] < 5
     ) {
-      return 'e';
+      return "e";
     } else if (
       d.properties[slider.property("value")] >= 5 &&
       d.properties[slider.property("value")] < 10
     ) {
-      return 'f';
+      return "f";
     } else if (
       d.properties[slider.property("value")] >= 10 &&
       d.properties[slider.property("value")] < 15
     ) {
-      return 'g';
+      return "g";
     } else if (
       d.properties[slider.property("value")] >= 15 &&
       d.properties[slider.property("value")] < 20
     ) {
-      return 'h';
+      return "h";
     } else if (
       d.properties[slider.property("value")] >= 20 &&
       d.properties[slider.property("value")] < 25
     ) {
-      return 'i';
+      return "i";
     } else if (d.properties[slider.property("value")] >= 25) {
-      return 'j';
+      return "j";
     }
   };
 
@@ -75,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
   const slider = select("#slider");
-  const range = select("#range");
+  // const range = select("#range");
   const units = selectAll("input[name='units']");
   let unit;
 
@@ -89,21 +95,30 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   loadAndProcessData().then(countries => {
-    let year;
     features = countries.features;
     render();
 
-    const oninput = function() {
-      range.property("innerHTML", slider.property("value"));
-      year = slider.property("value");
-      render(year);
-    };
+    // const oninput = function() {
+    //   range.property("innerHTML", slider.property("value"));
+    //   // timer(render).restart(render);
+    //   render();
+    // };
+
+    // slider.call(
+    //   drag()
+    //     .on("start.interrupt", function() {
+    //       slider.interrupt();
+    //     })
+    //     .on("start drag", function() {
+    //       oninput();
+    //     })
+    // );
 
     //update slider with smooth interpolation
-    slider.on("input", () => oninput());
+    slider.on("change", () => render());
   });
 
-  const render = (year = 1901) => {
+  const render = () => {
     colorScale
       .domain(features.map(colorValue))
       .domain(
@@ -132,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function() {
       colorValue,
       colorScale,
       selectedColorValue,
-      // year,
       slider
     });
   };
