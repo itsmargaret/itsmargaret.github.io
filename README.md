@@ -1,6 +1,6 @@
 # Temperature Change over Time
 
-This interactive map displays a visual representation of temperature change over time, as measured by average annual temperature of each country. By placing this information into the visual context of a chloropleth map, trends over time are more easily perceived. A viewer can use the color legend to filter countries by temperature range. Drag and zoom features allow the viewer to examine specific regions or view the entire globe at once. 
+This interactive map displays a visual representation of temperature change over time, as measured by average annual temperature of each country. By placing this information into the visual context of a choropleth map, trends over time are more easily perceived. A viewer can use the color legend to filter countries by temperature range. Drag and zoom features allow the viewer to examine specific regions or view the entire globe at once. 
 
 Data sourced from the [Climatic Research Unit](http://www.cru.uea.ac.uk/data) of University of East Anglia.
 
