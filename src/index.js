@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // update to -22.3 ? - 29.7; include undefined as separate category
   let colorValue = d => {
     if (
-      d.properties[slider.property("value")] < -15
+      d.properties[slider.property("value")] < -15 
     ) {
       return "a";
     } else if (
