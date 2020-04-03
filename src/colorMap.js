@@ -49,11 +49,14 @@ export const colorMap = (selection, props) => {
     .select("title")
     .text(d => {
       let temp;
+      if (d.properties[slider.property("value")] === "Undefined")
+        return "Data Not Available";
       if (unit !== "F") {
         temp = d.properties[slider.property("value")];
       } else {
         temp = (d.properties[slider.property("value")] * 1.8 + 32).toFixed(1);
       }
+
       return d.properties.name + ": " + temp + "°";
     });
   countryPathsEnter
