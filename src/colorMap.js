@@ -49,9 +49,9 @@ export const colorMap = (selection, props) => {
     .select("title")
     .text(d => {
       let temp;
-      if (d.properties[slider.property("value")] === "Undefined")
-        return "Data Not Available";
-      if (unit !== "F") {
+      if (d.properties[slider.property("value")] === 100) {
+        return d.properties.name + ": Data Not Available";
+      } else if (unit !== "F") {
         temp = d.properties[slider.property("value")];
       } else {
         temp = (d.properties[slider.property("value")] * 1.8 + 32).toFixed(1);
@@ -59,13 +59,16 @@ export const colorMap = (selection, props) => {
 
       return d.properties.name + ": " + temp + "°";
     });
-  countryPathsEnter
-    .append("title")
-    .text(
-      d =>
+  countryPathsEnter.append("title").text(d => {
+    if (d.properties[slider.property("value")] === 100) {
+      return "Data Not Available";
+    } else {
+      return (
         d.properties.name +
         ": " +
         d.properties[slider.property("value")] +
         "°C "
-    );
+      );
+    }
+  });
 };

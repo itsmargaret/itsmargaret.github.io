@@ -17,9 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let colorValue = d => {
     if (d.properties[slider.property("value")] === 100) {
       return "a";
-    } else if (
-      d.properties[slider.property("value")] < -15
-    ) {
+    } else if (d.properties[slider.property("value")] < -15) {
       console.log("true");
       return "b";
     } else if (
@@ -59,7 +57,10 @@ document.addEventListener("DOMContentLoaded", function() {
       d.properties[slider.property("value")] < 23.5
     ) {
       return "i";
-    } else if (d.properties[slider.property("value")] >= 23.5) {
+    } else if (
+      d.properties[slider.property("value")] >= 23.5 &&
+      d.properties[slider.property("value")] < 100
+    ) {
       return "j";
     }
   };
