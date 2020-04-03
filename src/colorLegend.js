@@ -50,47 +50,47 @@ export const colorLegend = (selection, props) => {
     .text(d => {
       if (unit !== "F") {
         if (d === 'a') {
-          return "< -15 °C";
+          return "Data Not Available";
         } else if (d === 'b') {
-          return "-15 - -10.1 °C";
+          return "< -15 °C";
         } else if (d === 'c') {
-          return "-10 - -5.1 °C";
+          return "-15 - -9.6 °C";
         } else if (d === 'd') {
-          return "-5 - -.1 °C";
+          return "-9.5 - -4.1 °C";
         } else if (d === 'e') {
-          return "0 - 4.9 °C";
+          return "-4 - 1.4 °C";
         } else if (d === 'f') {
-          return "5 - 9.9 °C";
+          return "1.5 - 6.9 °C";
         } else if (d === 'g') {
-          return "10 - 14.9 °C";
+          return "7 - 12.4 °C";
         } else if (d === 'h') {
-          return "15 - 19.9 °C";
+          return "12.5 - 17.9 °C";
         } else if (d === 'i') {
-          return "20 - 25 °C";
+          return "18 - 23.5 °C";
         } else if (d === 'j') {
-          return "> 25 °C";
+          return "> 23.5 °C";
         }
       } else {
         if (d === "a") {
-          return "< 5 °F";
+          return "Data Not Available";
         } else if (d === "b") {
-          return "5 - 13.9 °F";
+          return "< 5 °F";
         } else if (d === "c") {
-          return "14 - 22.9 °F";
+          return "5 - 14.8 °F";
         } else if (d === "d") {
-          return "23 - 31.9 °F";
+          return "14.9 - 24.7 °F";
         } else if (d === "e") {
-          return "32 - 40.9 °F";
+          return "24.8 - 34.6 °F";
         } else if (d === "f") {
-          return "41 - 49.9 °F";
+          return "34.7 - 44.5 °F";
         } else if (d === "g") {
-          return "50 - 58.9 °F";
+          return "44.6 - 54.4 °F";
         } else if (d === "h") {
-          return "59 - 67.9 °F";
+          return "54.5 - 64.3 °F";
         } else if (d === "i") {
-          return "68 - 77 °F";
+          return "64.4 - 74.3 °F";
         } else if (d === "j") {
-          return "> 77 °F";
+          return "> 74.3 °F";
         }
       }
     })
