@@ -1,9 +1,4 @@
-import {
-  select,
-  selectAll,
-  scaleOrdinal,
-  schemeSpectral
-} from "d3";
+import { select, selectAll, scaleOrdinal, schemeSpectral } from "d3";
 import { loadAndProcessData } from "./loadAndProcessData";
 import { colorLegend } from "./colorLegend";
 import { colorMap } from "./colorMap";
@@ -18,54 +13,50 @@ document.addEventListener("DOMContentLoaded", function() {
   const colorScale = scaleOrdinal(schemeSpectral[10]);
 
   //TODO review scale and edit for highs/lows after completing raw data
-  // update to -22.3 ? - 29.7; include undefined as separate category
+  // update to -17.5 - 29.7 (-20 - 30); include undefined as separate category
   let colorValue = d => {
-    if (
-      d.properties[slider.property("value")] < -15 ||
-      d.properties[slider.property("value")] === undefined
-    ) {
+    if (d.properties[slider.property("value")] === "undefined") {
       return "a";
     } else if (
-      d.properties[slider.property("value")] >= -15 &&
-      d.properties[slider.property("value")] < -10
+      d.properties[slider.property("value")] < -15
     ) {
       return "b";
     } else if (
-      d.properties[slider.property("value")] >= -10 &&
-      d.properties[slider.property("value")] < -5
+      d.properties[slider.property("value")] >= -15 &&
+      d.properties[slider.property("value")] < -9.5
     ) {
       return "c";
     } else if (
-      d.properties[slider.property("value")] >= -5 &&
-      d.properties[slider.property("value")] < 0
+      d.properties[slider.property("value")] >= -9.5 &&
+      d.properties[slider.property("value")] < -4
     ) {
       return "d";
     } else if (
-      d.properties[slider.property("value")] >= 0 &&
-      d.properties[slider.property("value")] < 5
+      d.properties[slider.property("value")] >= -4 &&
+      d.properties[slider.property("value")] < 1.5
     ) {
       return "e";
     } else if (
-      d.properties[slider.property("value")] >= 5 &&
-      d.properties[slider.property("value")] < 10
+      d.properties[slider.property("value")] >= 1.5 &&
+      d.properties[slider.property("value")] < 7
     ) {
       return "f";
     } else if (
-      d.properties[slider.property("value")] >= 10 &&
-      d.properties[slider.property("value")] < 15
+      d.properties[slider.property("value")] >= 7 &&
+      d.properties[slider.property("value")] < 12.5
     ) {
       return "g";
     } else if (
-      d.properties[slider.property("value")] >= 15 &&
-      d.properties[slider.property("value")] < 20
+      d.properties[slider.property("value")] >= 12.5 &&
+      d.properties[slider.property("value")] < 18
     ) {
       return "h";
     } else if (
-      d.properties[slider.property("value")] >= 20 &&
-      d.properties[slider.property("value")] < 25
+      d.properties[slider.property("value")] >= 18 &&
+      d.properties[slider.property("value")] < 23.5
     ) {
       return "i";
-    } else if (d.properties[slider.property("value")] >= 25) {
+    } else if (d.properties[slider.property("value")] >= 23.5) {
       return "j";
     }
   };
@@ -143,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
       colorValue,
       colorScale,
       selectedColorValue,
-      slider, 
+      slider,
       unit
     });
   };
