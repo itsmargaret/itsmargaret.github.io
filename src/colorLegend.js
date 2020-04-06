@@ -69,7 +69,7 @@ export const colorLegend = (selection, props) => {
           return "19.5 - 25 °C";
         } else if (d === 'j') {
           return "> 25 °C";
-        }
+        } 
       } else {
         if (d === "a") {
           return "Data Not Available";

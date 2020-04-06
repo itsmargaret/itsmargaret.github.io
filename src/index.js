@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // update to -17.5 - 29.8 (-20 - 30); include undefined as separate category
   let colorValue = d => {
-    if (d.properties[slider.property("value")] > 99) {
+    if (d.properties[slider.property("value")] > 99 || !d.properties[slider.property("value")]) {
       return "a";
     } else if (d.properties[slider.property("value")] < -13.5) {
       return "b";
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
       d.properties[slider.property("value")] < 99
     ) {
       return "j";
-    }
+    } 
   };
 
   let selectedColorValue;
