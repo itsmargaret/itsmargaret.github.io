@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
           .sort()
           .reverse()
       )
-      .range(schemeSpectral[10]);
+      .range(schemeSpectral);
 
     colorLegendG.call(colorLegend, {
       colorScale,
