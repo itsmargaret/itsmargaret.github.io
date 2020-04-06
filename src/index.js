@@ -13,49 +13,49 @@ document.addEventListener("DOMContentLoaded", function() {
   const colorScale = scaleOrdinal(schemeSpectral[10]);
 
   //TODO review scale and edit for highs/lows after completing raw data
-  // update to -17.5 - 29.7 (-20 - 30); include undefined as separate category
+  // update to -17.5 - 29.8 (-20 - 30); include undefined as separate category
   let colorValue = d => {
     if (d.properties[slider.property("value")] > 99) {
       return "a";
-    } else if (d.properties[slider.property("value")] < -15) {
+    } else if (d.properties[slider.property("value")] < -13.5) {
       return "b";
     } else if (
-      d.properties[slider.property("value")] >= -15 &&
-      d.properties[slider.property("value")] < -9.5
+      d.properties[slider.property("value")] >= -13.5 &&
+      d.properties[slider.property("value")] < -8
     ) {
       return "c";
     } else if (
-      d.properties[slider.property("value")] >= -9.5 &&
-      d.properties[slider.property("value")] < -4
+      d.properties[slider.property("value")] >= -8 &&
+      d.properties[slider.property("value")] < -2.5
     ) {
       return "d";
     } else if (
-      d.properties[slider.property("value")] >= -4 &&
-      d.properties[slider.property("value")] < 1.5
+      d.properties[slider.property("value")] >= -2.5 &&
+      d.properties[slider.property("value")] < 3
     ) {
       return "e";
     } else if (
-      d.properties[slider.property("value")] >= 1.5 &&
-      d.properties[slider.property("value")] < 7
+      d.properties[slider.property("value")] >= 3 &&
+      d.properties[slider.property("value")] < 8.5
     ) {
       return "f";
     } else if (
-      d.properties[slider.property("value")] >= 7 &&
-      d.properties[slider.property("value")] < 12.5
+      d.properties[slider.property("value")] >= 8.5 &&
+      d.properties[slider.property("value")] < 14
     ) {
       return "g";
     } else if (
-      d.properties[slider.property("value")] >= 12.5 &&
-      d.properties[slider.property("value")] < 18
+      d.properties[slider.property("value")] >= 14 &&
+      d.properties[slider.property("value")] < 19.5
     ) {
       return "h";
     } else if (
-      d.properties[slider.property("value")] >= 18 &&
-      d.properties[slider.property("value")] < 23.5
+      d.properties[slider.property("value")] >= 19.5 &&
+      d.properties[slider.property("value")] < 25
     ) {
       return "i";
     } else if (
-      d.properties[slider.property("value")] >= 23.5 &&
+      d.properties[slider.property("value")] >= 25 &&
       d.properties[slider.property("value")] < 99
     ) {
       return "j";

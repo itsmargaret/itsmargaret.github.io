@@ -52,45 +52,45 @@ export const colorLegend = (selection, props) => {
         if (d === 'a') {
           return "Data Not Available";
         } else if (d === 'b') {
-          return "< -15 °C";
+          return "< -13.5 °C";
         } else if (d === 'c') {
-          return "-15 - -9.6 °C";
+          return "-13.5 - -8.1 °C";
         } else if (d === 'd') {
-          return "-9.5 - -4.1 °C";
+          return "-8 - -2.6 °C";
         } else if (d === 'e') {
-          return "-4 - 1.4 °C";
+          return "-2.5 - 2.9 °C";
         } else if (d === 'f') {
-          return "1.5 - 6.9 °C";
+          return "3 - 8.4 °C";
         } else if (d === 'g') {
-          return "7 - 12.4 °C";
+          return "8.5 - 13.9 °C";
         } else if (d === 'h') {
-          return "12.5 - 17.9 °C";
+          return "14 - 19.4 °C";
         } else if (d === 'i') {
-          return "18 - 23.5 °C";
+          return "19.5 - 25 °C";
         } else if (d === 'j') {
-          return "> 23.5 °C";
+          return "> 25 °C";
         }
       } else {
         if (d === "a") {
           return "Data Not Available";
         } else if (d === "b") {
-          return "< 5 °F";
+          return "< 7.7 °F";
         } else if (d === "c") {
-          return "5 - 14.8 °F";
+          return "7.7 - 17.5 °F";
         } else if (d === "d") {
-          return "14.9 - 24.7 °F";
+          return "17.6 - 27.4 °F";
         } else if (d === "e") {
-          return "24.8 - 34.6 °F";
+          return "27.5 - 37.3 °F";
         } else if (d === "f") {
-          return "34.7 - 44.5 °F";
+          return "37.4 - 47.2 °F";
         } else if (d === "g") {
-          return "44.6 - 54.4 °F";
+          return "47.3 - 57.1 °F";
         } else if (d === "h") {
-          return "54.5 - 64.3 °F";
+          return "57.2 - 67.0 °F";
         } else if (d === "i") {
-          return "64.4 - 74.3 °F";
+          return "67.1 - 77 °F";
         } else if (d === "j") {
-          return "> 74.3 °F";
+          return "> 77 °F";
         }
       }
     })
