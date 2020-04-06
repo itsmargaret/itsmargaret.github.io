@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const colorScale = scaleOrdinal(schemeSpectral[10]);
 
-  //TODO review scale and edit for highs/lows after completing raw data
   // update to -17.5 - 29.8 (-20 - 30); include undefined as separate category
   let colorValue = d => {
     if (d.properties[slider.property("value")] > 99) {
