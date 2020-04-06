@@ -49,7 +49,7 @@ export const colorMap = (selection, props) => {
     .select("title")
     .text(d => {
       let temp;
-      if (d.properties[slider.property("value")] === 100) {
+      if (d.properties[slider.property("value")] > 99) {
         return d.properties.name + ": Data Not Available";
       } else if (unit !== "F") {
         temp = d.properties[slider.property("value")];
@@ -60,8 +60,8 @@ export const colorMap = (selection, props) => {
       return d.properties.name + ": " + temp + "°";
     });
   countryPathsEnter.append("title").text(d => {
-    if (d.properties[slider.property("value")] === 100) {
-      return "Data Not Available";
+    if (d.properties[slider.property("value")] > 99) {
+      return d.properties.name + ": Data Not Available";
     } else {
       return (
         d.properties.name +

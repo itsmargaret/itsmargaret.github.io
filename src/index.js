@@ -15,22 +15,19 @@ document.addEventListener("DOMContentLoaded", function() {
   //TODO review scale and edit for highs/lows after completing raw data
   // update to -17.5 - 29.7 (-20 - 30); include undefined as separate category
   let colorValue = d => {
-    if (d.properties[slider.property("value")] === 100) {
+    if (d.properties[slider.property("value")] > 99) {
       return "a";
     } else if (d.properties[slider.property("value")] < -15) {
-      console.log("true");
       return "b";
     } else if (
       d.properties[slider.property("value")] >= -15 &&
       d.properties[slider.property("value")] < -9.5
     ) {
-      console.log("true");
       return "c";
     } else if (
       d.properties[slider.property("value")] >= -9.5 &&
       d.properties[slider.property("value")] < -4
     ) {
-      console.log("true");
       return "d";
     } else if (
       d.properties[slider.property("value")] >= -4 &&
@@ -59,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
       return "i";
     } else if (
       d.properties[slider.property("value")] >= 23.5 &&
-      d.properties[slider.property("value")] < 100
+      d.properties[slider.property("value")] < 99
     ) {
       return "j";
     }
