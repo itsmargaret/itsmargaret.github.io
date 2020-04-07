@@ -24,7 +24,6 @@ export const loadAndProcessData = () =>
     let fake = {type: "Feature", properties: {name: "Fake Data"}}
     countries.features.push(fake);
     Object.assign(fake.properties, rowByName["Fake Data"]);
-    console.log(countries.features)
 
     return countries;
   });
