@@ -19,7 +19,7 @@
   "homepage": "https://github.com/itsmargaret/data-visualizations#readme",
   "devDependencies": {
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "d3": "^5.15.0",
